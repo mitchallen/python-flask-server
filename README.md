@@ -32,7 +32,7 @@ poetry init
 
 **Would you like to define your main dependencies interactively? (yes/no)** 
 
-* Select `flask`` as a dependency
+* Select `flask` as a dependency
 
 **Would you like to define your development dependencies interactively? (yes/no)**
 
