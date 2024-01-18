@@ -1,17 +1,18 @@
 from flask import Flask,jsonify
+from src.api.uptime import Uptime
 
-# flask run
+# poetry run python -m server
 
 app = Flask(__name__)
 
+# Create an instance of Uptime
+uptime_instance = Uptime()
+
 @app.route('/', methods = ['GET'])
 def health():
-    with open('/proc/uptime', 'r') as f:
-        uptime_seconds = float(f.readline().split()[0])
-
     data = {
         'app': __name__,
-        'uptime': uptime_seconds
+        'uptime': uptime_instance.toHHMMSS()
     }
     return jsonify(data)
 
