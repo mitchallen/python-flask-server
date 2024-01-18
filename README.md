@@ -30,6 +30,30 @@ poetry run pytest
 
 * * *
 
+## Docker
+
+### Build
+
+Run these commands outside the dev container (in a regular terminal window)
+
+```sh
+docker build -t flask-svr .
+```
+
+### Docker Run
+
+```sh
+docker run -d -p 3000:3000 --restart always --name flask-server flask-svr
+```
+
+### Docker Clean
+
+```sh
+docker stop flask-server && docker rm flask-server && docker rmi flask-svr
+```
+
+* * *
+
 ## Setup Notes
 
 * Add .gitignore file for Python
