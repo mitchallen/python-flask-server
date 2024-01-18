@@ -9,13 +9,24 @@ python-flask-server
 * **Run this from within the VS Code terminal window:**
 
 ```sh
-poetry run flask run  --port 3000
+# poetry run flask run --port 3000
+poetry run python -m server
 ```
 
 Browse to:
 
 * http://localhost:3000/
 * http://localhost:3000/hello
+
+* * *
+
+## Run tests
+
+* See: https://flask.palletsprojects.com/en/2.3.x/testing/
+
+```sh
+poetry run pytest
+```
 
 * * *
 
@@ -43,3 +54,4 @@ poetry init
 ```sh
 poetry add pytest pytest-bdd -D
 ```
+
