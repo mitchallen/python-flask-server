@@ -1,6 +1,6 @@
 # Makefile for python-flask-server
 
-.PHONY: help run test install docker-build docker-run docker-clean in-devcontainer
+.PHONY: help run test install docker-build docker-run docker-clean in-devcontainer black flake8 mypy lint
 
 help:
 	@echo "Available targets:"
@@ -11,6 +11,10 @@ help:
 	@echo "  docker-run    Run the Docker container"
 	@echo "  docker-clean  Stop and remove Docker container and image"
 	@echo "  in-devcontainer Check if running inside a Microsoft dev container"
+	@echo "  black          Format code using Black"
+	@echo "  flake8         Lint code using Flake8"
+	@echo "  mypy           Type-check code using mypy"
+	@echo "  lint           Run black, flake8, and mypy on the codebase"
 
 run:
 	poetry run python -m server
@@ -51,3 +55,14 @@ in-devcontainer:
 	else \
 		echo "Not running inside a Microsoft dev container."; \
 	fi
+
+black:
+	poetry run black src tests server.py
+
+flake8:
+	poetry run flake8 --max-line-length=100 src tests server.py
+
+mypy:
+	poetry run mypy src tests server.py
+
+lint: black flake8 mypy

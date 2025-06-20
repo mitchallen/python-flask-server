@@ -1,4 +1,4 @@
-from flask import Flask,jsonify
+from flask import Flask, jsonify, Response
 from src.api.uptime import Uptime
 
 # poetry run python -m server
@@ -6,16 +6,15 @@ from src.api.uptime import Uptime
 app = Flask(__name__)
 
 # Create an instance of Uptime
-uptime_instance = Uptime()
+uptime_instance: Uptime = Uptime()
 
-@app.route('/', methods = ['GET'])
-def health():
-    data = {
-        'app': __name__,
-        'uptime': uptime_instance.toHHMMSS()
-    }
+
+@app.route("/", methods=["GET"])
+def health() -> Response:
+    data = {"app": __name__, "uptime": uptime_instance.toHHMMSS()}
     return jsonify(data)
 
-@app.route('/hello')
-def hello_world():
+
+@app.route("/hello")
+def hello_world() -> str:
     return "<p>Hello, World!</p>"
