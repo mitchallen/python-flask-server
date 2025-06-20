@@ -18,13 +18,28 @@ test:
 	poetry run pytest
 
 docker-build:
-	docker build -t flask-svr .
+	@if [ -d "/.devcontainer" ] || [ -n "$$DEVCONTAINER" ] || [ -n "$$CODESPACES" ] || [ "$$REMOTE_CONTAINERS" = "true" ] || grep -q 'devcontainer' /proc/1/cgroup 2>/dev/null; then \
+		echo "docker-build must be run outside a dev container."; \
+		exit 1; \
+	else \
+		docker build -t flask-svr .; \
+	fi
 
 docker-run:
-	docker run -d -p 3000:3000 --restart always --name flask-server flask-svr
+	@if [ -d "/.devcontainer" ] || [ -n "$$DEVCONTAINER" ] || [ -n "$$CODESPACES" ] || [ "$$REMOTE_CONTAINERS" = "true" ] || grep -q 'devcontainer' /proc/1/cgroup 2>/dev/null; then \
+		echo "docker-run must be run outside a dev container."; \
+		exit 1; \
+	else \
+		docker run -d -p 3000:3000 --restart always --name flask-server flask-svr; \
+	fi
 
 docker-clean:
-	docker stop flask-server && docker rm flask-server && docker rmi flask-svr
+	@if [ -d "/.devcontainer" ] || [ -n "$$DEVCONTAINER" ] || [ -n "$$CODESPACES" ] || [ "$$REMOTE_CONTAINERS" = "true" ] || grep -q 'devcontainer' /proc/1/cgroup 2>/dev/null; then \
+		echo "docker-clean must be run outside a dev container."; \
+		exit 1; \
+	else \
+		docker stop flask-server && docker rm flask-server && docker rmi flask-svr; \
+	fi
 
 in-devcontainer:
 	@if [ -d "/.devcontainer" ] || [ -n "$$DEVCONTAINER" ] || [ -n "$$CODESPACES" ] || [ "$$REMOTE_CONTAINERS" = "true" ] || grep -q 'devcontainer' /proc/1/cgroup 2>/dev/null; then \
