@@ -87,3 +87,31 @@ poetry init
 poetry add pytest pytest-bdd -D
 ```
 
+## Quick Start (Makefile)
+
+1. Install dependencies:
+
+    make install
+
+2. Run the server:
+
+    make run
+
+3. Run tests:
+
+    make test
+
+4. Build, run, or clean Docker images (outside a dev container):
+
+    make docker-build
+    make docker-run
+    make docker-clean
+
+5. Check if you are in a dev container:
+
+    make in-devcontainer
+
+For more options, run:
+
+    make help
+
