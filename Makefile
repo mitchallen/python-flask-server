@@ -1,6 +1,6 @@
 # Makefile for python-flask-server
 
-.PHONY: help run test docker-build docker-run docker-clean
+.PHONY: help run test docker-build docker-run docker-clean in-devcontainer
 
 help:
 	@echo "Available targets:"
@@ -9,6 +9,7 @@ help:
 	@echo "  docker-build  Build the Docker image"
 	@echo "  docker-run    Run the Docker container"
 	@echo "  docker-clean  Stop and remove Docker container and image"
+	@echo "  in-devcontainer Check if running inside a Microsoft dev container"
 
 run:
 	poetry run python -m server
@@ -24,3 +25,10 @@ docker-run:
 
 docker-clean:
 	docker stop flask-server && docker rm flask-server && docker rmi flask-svr
+
+in-devcontainer:
+	@if [ -d "/.devcontainer" ] || [ -n "$$DEVCONTAINER" ] || [ -n "$$CODESPACES" ] || [ "$$REMOTE_CONTAINERS" = "true" ] || grep -q 'devcontainer' /proc/1/cgroup 2>/dev/null; then \
+		echo "Running inside a Microsoft dev container."; \
+	else \
+		echo "Not running inside a Microsoft dev container."; \
+	fi
