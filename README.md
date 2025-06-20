@@ -5,6 +5,10 @@ python-flask-server
 
 * Start Docker
 * Open the project in VS Code
+* If you had just cloned this project, run:
+```sh
+poetry install
+```
 
 * **Run this from within the VS Code terminal window:**
 
