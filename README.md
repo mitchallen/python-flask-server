@@ -21,7 +21,9 @@ python-flask-server
 4. Build, run, or clean Docker images (outside a dev container):
 
     make docker-build
+
     make docker-run
+
     make docker-clean
 
 5. Check if you are in a dev container:
